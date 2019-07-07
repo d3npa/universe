@@ -12,7 +12,7 @@ You can forward to it by using a proxy such as Nginx or Apache.
 
 ## Usage
 Files placed in the `contents/` folder will be accessible from the web. 
-The index file is located at `contents/posts/index.txt` (subject to change).
+The index file is located at `contents/.index.txt`.
 
 #### File extensions matter!
 - `.md` and `.markdown` will load as a Markdown file

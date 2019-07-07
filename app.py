@@ -4,7 +4,7 @@ from flask import Flask, make_response, render_template, abort, request, redirec
 from mimetypes import guess_type as guess_mime
 from werkzeug.utils import secure_filename
 from os.path import realpath
-import os, time, universe, markdown, sys
+import os, sys, time, universe, markdown
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -14,8 +14,7 @@ os.chdir(universe.root)
 # デフォルトログを無効化する
 import logging
 log = logging.getLogger('werkzeug')
-# log.setLevel(logging.ERROR)
-log.disabled = True
+log.setLevel(logging.ERROR)
 
 @app.after_request
 def log_access(response):
@@ -23,14 +22,13 @@ def log_access(response):
         http_verb = request.method
         accessed_path = request.path
         status_code = response.status
-        line = "[{0}] {1} - {2} - {3} {4}\n".format(
+        sys.stdout.write("[{0}] {1} - {2} - {3} {4}\n".format(
                 time.strftime("%y/%m/%d %H:%M:%S"),
                 connecting_ip,
                 status_code,
                 http_verb,
                 accessed_path
-        )
-        sys.stdout.write(line)
+        ))
         sys.stdout.flush()
         return response
 
@@ -41,11 +39,18 @@ def return_ip():
         res.headers["Content-Type"] = "text/plain; charset=UTF-8"
         return res
 
+@app.route("/robots.txt")
+def return_robotstxt():
+        data = "User-agent: *\nDisallow: /\n"
+        response = make_response(data)
+        response.headers["Content-Type"] = "text/plain; charset=UTF-8;"
+        return response
+
 @app.route("/")
 def catch_index():
-        return catch_all("posts/index.txt")
+        return catch_all(".index.txt")
 
-@app.route("/posts/index.txt")
+@app.route("/.index.txt")
 def reroute_index():
         return redirect("/", code=302)
 
@@ -55,7 +60,7 @@ def catch_all(path):
         # print("[* catch_all] Path: %s" % path)
         if path[0] in ["css", "js"]:
                 return get_resource("/".join(path))
-        elif path[0] in ["posts", "ctfwriteups"]:
+        else:
                 return get_document("/".join(path))
         abort(404)
 
@@ -106,4 +111,3 @@ def get_document(path):
 
 if __name__ == '__main__':
     app.run()
-

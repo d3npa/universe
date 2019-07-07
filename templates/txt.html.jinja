@@ -1,0 +1,14 @@
+{% extends "base.html.jinja" %}
+{% block head %}
+<link rel="stylesheet" href="/css/txt.css">
+{% endblock head %}
+{% block body %}
+<div class="txt-container">
+<div class="txt-header">.: <a href="/">[home]</a> <a href="{{ data.up }}">[..]</a> | {{ data.ip }} :.
+
+</div>
+<div class="txt-content">
+{{ data.content }}
+</div>
+</div>
+{% endblock body %}

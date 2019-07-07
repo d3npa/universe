@@ -1,10 +1,2 @@
-      _____       
-    \-     -/     裏サイト、コードネーム「Universe」へようこそ！
- \_/         \    
- |        O O |   <a target="_blank" href="https://mstdn.jp/@d3npa">[Mastodon]</a> <a target="_blank" href="https://twitter.com/ousanko">[Twitter]</a> <a target="_blank" href="mailto:d3npa@pm.me">[Email]</a> <a target="_blank" href="/publickey.d3npa@pm.me.asc">[PGP]</a>
- |_  <   )  3 )   
- / \         /    <-- このフグかわいいでしょ ❤
-    /-_____-\     
-
-<center>-={ ファイル一覧（クリック可能）}=-</center>
+<center>-={ ls -l }=-</center>
 $(ls -l $root)

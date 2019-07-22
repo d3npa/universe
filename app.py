@@ -32,6 +32,14 @@ def log_access(response):
         sys.stdout.flush()
         return response
 
+@app.errorhandler(404)
+def handle_404(error):
+        path = universe.root + "/content/.404.txt"
+        if not os.path.exists(universe.flatten(path)):
+                return error
+        res = get_document(".404.txt")
+        return res
+
 @app.route("/ip")
 def return_ip():
         ip = remote_addr = request.headers["X-Forwarded-For"] if "X-Forwarded-For" in request.headers else request.remote_addr

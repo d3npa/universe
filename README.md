@@ -16,6 +16,7 @@ In the event a Local File Inclusion vulnerability is discovered, an `access_log.
 ## Usage
 Files placed in the `contents/` folder will be accessible from the web. 
 The index file is located at `contents/.index.txt`.
+There is also a 404 message defined in `contents/.404.txt`.
 
 #### File extensions matter!
 - `.md` and `.markdown` will load as a Markdown file

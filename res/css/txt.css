@@ -1,7 +1,7 @@
 html, body {
         background-color: #10151a;
         color: #00ff80 !important;
-        text-shadow: 2px 2px 5px #88ffcc !important;
+        text-shadow: 0px 0px 5px #88ffcc !important;
         min-height: 100vh;
         line-height: 1.3;
 }

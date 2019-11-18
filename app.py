@@ -38,6 +38,7 @@ def handle_404(error):
         if not os.path.exists(universe.flatten(path)):
                 return error
         res = get_document(".404.txt")
+        res.status_code = 404
         return res
 
 @app.route("/ip")

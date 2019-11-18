@@ -58,3 +58,7 @@ div.txt-content pre {
         padding: 1.0rem;
         white-space: pre-wrap;
 }
+
+div.txt-content code {
+	font-family: "Hack", "Noto Sans Mono JP", monospace;
+}

@@ -141,7 +141,7 @@ def get_rss():
     data = []
     with open(publications, "r") as f:
         for line in f:
-            if line:
+            if len(line) > 1: # empty line is '\n'
                 if line[0] == "#":
                     continue
                 if line[0] == "/":

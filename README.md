@@ -46,7 +46,7 @@ Which turns into:
 
 ### RSS
 There is minimal support for RSS feeds.
-Please not that **newly created articles must be manually added** to the RSS feed by adding a line in `publications.txt` for each article. This is a design choice - I create and delete files on my site on a whim, and don't need to be updating everyone everytime I do so. An example `publifications.txt` is already included, but I'll mirror it below.
+Please not that **newly created articles must be manually added** to the RSS feed by adding a line in `publications.txt` for each article. This is a design choice - I create and delete files on my site on a whim, and don't need to be updating everyone everytime I do so. Here is an example `publifications.txt` file.
 
 ```
 # Format:
@@ -58,7 +58,7 @@ Please not that **newly created articles must be manually added** to the RSS fee
 /posts/myarticle.md:Articles in Markdown:I tried writing an article in Markdown!
 ```
 
-Note: Also be sure to edit the base url to match your site in [`templates/rss.xml.jinja`](https://github.com/d3npa/universe/blob/master/templates/rss.xml.jinja) on lines `6`, `14`, `15`. 
+Note: Also be sure to edit the base url to match your site in [`templates/rss.xml.jinja`](https://github.com/d3npa/universe/blob/master/templates/rss.xml.jinja) on lines `6`, `14`, `15`.
 
 ## Warning
 If a [*Local File Inclusion*](https://www.owasp.org/index.php/Testing_for_Local_File_Inclusion) (LFI) vulnerability were to be discovered, an `access_log.txt` file could be exploited to gain arbitrary remote code execution (RCE). Using any other extension, such as `access.log`, mitigates this problem, as only `.txt` files may contain executable bash commands. Consider doing the same with any other file written by the web server.

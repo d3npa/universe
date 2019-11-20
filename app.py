@@ -166,7 +166,7 @@ def get_rss():
     # sort data
     data = sorted(data, key=lambda f: -f["time"])
     for f in data:
-        f["time"] = datetime.datetime.fromtimestamp(f["time"]).strftime("%a, %d %b %y %T UTC")
+        f["time"] = datetime.datetime.fromtimestamp(f["time"]).strftime("%a, %d %b %y %T UT")
     res = make_response("", 200)
     res.set_data(render_template("rss.xml.jinja", entries=data))
     res.headers["Content-Type"] = "text/xml; charset=UTF-8"

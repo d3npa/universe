@@ -1,0 +1,7 @@
+# Format:
+# - One entry per line; URI:TITLE:DESCRIPTION
+# - Lines starting with a '#' are ignored (comments)
+# - Date is taken from file creation time
+# - Colons ':' can be escaped: "\:"
+# /welcome.txt:Welcome to my blog:Just a test post!
+# /posts/myarticle.md:Articles in Markdown:I tried writing an article in Markdown!

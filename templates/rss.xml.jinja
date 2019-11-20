@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+{# Based on: https://stackoverflow.com/q/35971305 #}
+<rss version="2.0">
+    <channel>
+        <title>Blog Title</title>
+        <link>https://myblogisvery.moe</link>
+        {# Domain is available if anyone wants it lol #}
+        {# https://njal.la/list/?search=myblogisvery.moe #}
+        <description>My very moe blog</description>
+            {% for entry in entries %}
+                <item>
+                  <title>{{ entry.title }}</title>
+                  <description>{{ entry.description }}</description>
+                  <link>https://myblogisvery.moe/{{ entry.link }}</link>
+                  <pubDate>{{ entry.time }}</pubDate>
+                </item>
+            {% endfor %}
+    </channel>
+</rss>

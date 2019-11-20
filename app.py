@@ -4,7 +4,7 @@ from flask import Flask, make_response, render_template, abort, request, redirec
 from mimetypes import guess_type as guess_mime
 from werkzeug.utils import secure_filename
 from os.path import realpath
-import os, sys, time, universe, markdown
+import os, sys, time, universe, markdown, re, datetime
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -69,6 +69,8 @@ def catch_all(path):
         # print("[* catch_all] Path: %s" % path)
         if path[0] in ["css", "js"]:
                 return get_resource("/".join(path))
+        elif len(path) == 1 and path[0] == "rss":
+                return get_rss()
         else:
                 return get_document("/".join(path))
         abort(404)
@@ -117,6 +119,58 @@ def get_document(path):
                                 res.set_data(data)
                         return res
         abort(404)
+
+def get_rss():
+    """
+        Get list of public content from /publications.txt.
+        Note that publications.txt should be in the same directory as app.py, not inside /content/!
+        Links will be tested and sorted by file creation time.
+        .publications.txt example below:
+            1   # Format:
+            2   # - One entry per line; URI:TITLE:DESCRIPTION
+            3   # - Lines starting with a '#' are ignored (comments)
+            4   # - Date is taken from file creation time
+            5   # - Colons ':' can be escaped: "\:"
+            6   /welcome.txt:Welcome to my blog:Just a test post!
+            7   /posts/myarticle.md:Articles in Markdown:I tried writing an article in Markdown!
+    """
+    # generate entries
+    publications = universe.root + "/publications.txt"
+    if not os.path.exists(publications):
+        abort(404)
+    data = []
+    with open(publications, "r") as f:
+        for line in f:
+            if line:
+                if line[0] == "#":
+                    continue
+                if line[0] == "/":
+                    line = line[1:]
+                line2 = re.sub("(?<=[^\\\]):", "\x00", line)
+                line3 = re.sub("\\\:", ":", line2)
+                info = line3.split("\x00")
+                info = {
+                    "link": info[0],
+                    "title": info[1],
+                    "description": info[2]
+                }
+                # check file and get ctime
+                fpath = universe.root + "/content/" + info["link"]
+                if not os.path.exists(fpath):
+                    continue
+                ctime = os.stat(fpath).st_ctime
+                info.update({"time" : ctime})
+                data.append(info)
+    if not data:
+        abort(404)
+    # sort data
+    data = sorted(data, key=lambda f: -f["time"])
+    for f in data:
+        f["time"] = datetime.datetime.fromtimestamp(f["time"]).strftime("%a, %d %b %y %T UTC")
+    res = make_response("", 200)
+    res.set_data(render_template("rss.xml.jinja", entries=data))
+    res.headers["Content-Type"] = "text/xml; charset=UTF-8"
+    return res
 
 if __name__ == '__main__':
     app.run()

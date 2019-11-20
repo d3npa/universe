@@ -44,5 +44,19 @@ Which turns into:
 **!! Note: These commands are executed on the server whenever a user views the page.**<br>
 **!! It is the admin's responsibility to ensure commands are safe to execute.**
 
+### RSS
+There is minimal support for RSS feeds.
+Please not that **newly created articles must be manually added** to the RSS feed by adding a line in `publications.txt` for each article. This is a design choice - I create and delete files on my site on a whim, and don't need to be updating everyone everytime I do so. An example `publifications.txt` is already included, but I'll mirror it below.
+
+```
+# Format:
+# - One entry per line; URI:TITLE:DESCRIPTION
+# - Lines starting with a '#' are ignored (comments)
+# - Date is taken from file creation time
+# - Colons ':' can be escaped: "\:"
+/welcome.txt:Welcome to my blog:Just a test post!
+/posts/myarticle.md:Articles in Markdown:I tried writing an article in Markdown!
+```
+
 ## Warning
 If a *Local File Inclusion* (LFI) vulnerability were to be discovered, an `access_log.txt` file could be exploited to gain arbitrary remote code execution (ARCE). Using any other extension, such as `access.log`, mitigates this problem, as only `.txt` files may contain executable bash commands. Consider doing the same with any other file written by the web server.

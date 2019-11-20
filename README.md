@@ -58,5 +58,7 @@ Please not that **newly created articles must be manually added** to the RSS fee
 /posts/myarticle.md:Articles in Markdown:I tried writing an article in Markdown!
 ```
 
+Note: Also be sure to edit the base url to match your site in [`templates/rss.xml.jinja`](https://github.com/d3npa/universe/blob/master/templates/rss.xml.jinja) on lines `6`, `14`, `15`. 
+
 ## Warning
 If a [*Local File Inclusion*](https://www.owasp.org/index.php/Testing_for_Local_File_Inclusion) (LFI) vulnerability were to be discovered, an `access_log.txt` file could be exploited to gain arbitrary remote code execution (RCE). Using any other extension, such as `access.log`, mitigates this problem, as only `.txt` files may contain executable bash commands. Consider doing the same with any other file written by the web server.

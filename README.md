@@ -59,4 +59,4 @@ Please not that **newly created articles must be manually added** to the RSS fee
 ```
 
 ## Warning
-If a *Local File Inclusion* (LFI) vulnerability were to be discovered, an `access_log.txt` file could be exploited to gain arbitrary remote code execution (ARCE). Using any other extension, such as `access.log`, mitigates this problem, as only `.txt` files may contain executable bash commands. Consider doing the same with any other file written by the web server.
+If a [*Local File Inclusion*](https://www.owasp.org/index.php/Testing_for_Local_File_Inclusion) (LFI) vulnerability were to be discovered, an `access_log.txt` file could be exploited to gain arbitrary remote code execution (RCE). Using any other extension, such as `access.log`, mitigates this problem, as only `.txt` files may contain executable bash commands. Consider doing the same with any other file written by the web server.

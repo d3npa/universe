@@ -1,6 +1,13 @@
 # universe
 A minimal unmanaged blog app written in Flask
 
+## Note
+This project seriously needs a rewrite. I'm not too proud of this code.
+However, I'm currently preoccupied with other projects at the moment.
+Feel free to rewrite this app on your own. If you do, please share a link with me so I can post it here.
+Otherwise I will get back to this project eventually.
+Thank you for reading.
+
 ## Installation
 ```bash
 git clone https://github.com/d3npa/universe.git && cd universe
